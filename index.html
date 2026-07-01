@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0078d7;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            flex-direction: column;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .update-screen,
+        .infected-screen {
+            width: 100%;
+            max-width: 960px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .update-screen h1 {
+            font-size: clamp(2rem, 4vw, 4rem);
+            margin: 0;
+            letter-spacing: 0.03em;
+        }
+
+        .update-screen p {
+            margin: 14px 0 0;
+            max-width: 760px;
+            line-height: 1.5;
+            font-size: 1.05rem;
+        }
+
+        .progress-wrap {
+            width: 100%;
+            max-width: 600px;
+            height: 26px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            margin: 24px 0;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px 0 0 16px;
+            transition: width 0.8s ease;
+        }
+
+        .update-small {
+            margin-top: 8px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 720px;
+        }
+
+        .infected-screen {
+            background: #000;
+            color: #1aff1a;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 0.95rem;
+            text-align: left;
+            padding: 22px;
+            border: 2px solid #1aff1a;
+            border-radius: 12px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            min-height: 70vh;
+        }
+
+        .infected-screen .output {
+            width: 100%;
+            max-height: 70vh;
+            overflow: hidden;
+            white-space: pre-wrap;
+        }
+
+        .infected-screen .cursor {
+            width: 10px;
+            height: 18px;
+            background: #1aff1a;
+            animation: blink 1s steps(1) infinite;
+            margin-top: 6px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            50.1%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="bg-dark bg-gradient text-white text-center p-5">
+
+        <h1>Mais Cursos Web </h1>
+        <P>Aprendendo o Bootstrap</P>
+        <button class="btn btn-outline-info">
+            Não Clique Aqui
+        </button>
+
+    </header>
+    <section class="container mt-5">
+        <h2 class="text-center mb-4 text-warning">Produtos</h2>
+        <div class="row">
+
+            <div class="col">
+
+                <div class="card text-center">
+
+                    <img src="capa.jpg" class="card-img-top">
+
+                    <div class="card-body">
+
+
+                        <h3>
+                            Item 1
+                        </h3>
+                        <p>
+                            Descrição do item
+                        </p>
+                        <button class="btn btn-outline-info">
+                            Comprar
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+                <div class="card text-center">
+
+                    <img src="capa2.jpeg" class="card-img-top">
+                    
+
+                    <div class="card-body">
+                        
+
+
+                        <h3>
+                            Item 1
+                        </h3>
+                        <p>
+                            Descrição do item
+                        </p>
+                        <button class="btn btn-outline-info">
+                            Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+                <div class="card text-center">
+
+                    <img src="capa3.jpg" class="card-img-top">
+
+                    <div class="card-body">
+
+
+                        <h3>
+                            Item 1
+                        </h3>
+                        <p>
+                            Descrição do item
+                        </p>
+                        <button class="btn btn-outline-info">
+                            Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col">
+
+                <div class="card text-center">
+
+                    <img src="capa4.jpg" class="card-img-top">
+
+                    <div class="card-body">
+
+
+                        <h3>
+                            Item 1
+                        </h3>
+                        <p>
+                            Descrição do item
+                        </p>
+                        <button class="btn btn-outline-info">
+                            Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+                <div class="card text-center">
+
+                    <img src="capa5.jpg" class="card-img-top">
+
+                    <div class="card-body">
+
+
+                        <h3>
+                            Item 1
+                        </h3>
+                        <p>
+                            Descrição do item
+                        </p>
+                        <button class="btn btn-outline-info">
+                            Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+
+                <div class="card text-center">
+
+                    <img src="capa6.jpg" class="card-img-top">
+
+                    <div class="card-body">
+
+
+                        <h3>
+                            Item 1
+                        </h3>
+                        <p>
+                            Descrição do item
+                        </p>
+                        <button class="btn btn-outline-info">
+                            Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-dark bg-gradient text-white text-center p-3 mt-5">
+        Todos os direitos Reservados 💀
+    </footer>
+
+    <div id="fakeScreen" class="overlay" aria-hidden="true">
+        <div id="updateScreen" class="update-screen">
+            <h1>Windows Update</h1>
+            <p id="updateText">Preparando atualização do Windows...</p>
+            <div class="progress-wrap">
+                <div class="progress-bar"></div>
+            </div>
+            <p id="updateInfo" class="update-small">Não desligue o computador. Isto pode demorar alguns minutos.</p>
+        </div>
+        <div id="infectedScreen" class="infected-screen" hidden>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px;">💀</h1>
+            <div class="output" id="infectedOutput"></div>
+            <div class="cursor"></div>
+        </div>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll('button');
+        const fakeScreen = document.getElementById('fakeScreen');
+        const updateScreen = document.getElementById('updateScreen');
+        const infectedScreen = document.getElementById('infectedScreen');
+        const progressBar = fakeScreen.querySelector('.progress-bar');
+        const updateText = document.getElementById('updateText');
+        const updateInfo = document.getElementById('updateInfo');
+        const infectedOutput = document.getElementById('infectedOutput');
+
+        let sequenceRunning = false;
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                if (!sequenceRunning) {
+                    sequenceRunning = true;
+                    startFakeSequence();
+                }
+            });
+        });
+
+        function enterFullScreen() {
+            if (fakeScreen.requestFullscreen) {
+                fakeScreen.requestFullscreen().catch(() => {
+                    // Se não for possível entrar em tela cheia, continua com a sobreposição normal.
+                });
+            }
+        }
+
+        function startFakeSequence() {
+            fakeScreen.classList.add('active');
+            updateScreen.hidden = false;
+            infectedScreen.hidden = true;
+            infectedOutput.textContent = '';
+            progressBar.style.width = '0%';
+            updateText.textContent = 'Preparando atualização do Windows...';
+            updateInfo.textContent = 'Não desligue o computador. Isto pode demorar alguns minutos.';
+            enterFullScreen();
+
+            const steps = [
+                { text: 'Instalando atualizações 23% completo', percent: 15 },
+                { text: 'Instalando atualizações 47% completo', percent: 38 },
+                { text: 'Configurando recursos 1 de 4', percent: 56 },
+                { text: 'Configurando configurações 2 de 4', percent: 68 },
+                { text: 'Aplicando correções de segurança', percent: 84 },
+                { text: 'Reiniciando em breve...', percent: 100 }
+            ];
+
+            let currentStep = 0;
+
+            function nextStep() {
+                if (currentStep >= steps.length) {
+                    showInfectedScreen();
+                    return;
+                }
+
+                const step = steps[currentStep++];
+                progressBar.style.width = step.percent + '%';
+                updateText.textContent = step.text;
+                updateInfo.textContent = 'Seu dispositivo está sendo atualizado. Por favor, aguarde.';
+                const delay = 1200 + Math.random() * 900;
+                setTimeout(nextStep, delay);
+            }
+
+            setTimeout(nextStep, 300);
+        }
+
+        function showInfectedScreen() {
+            updateScreen.hidden = true;
+            infectedScreen.hidden = false;
+            const lines = [
+                'Iniciando execução de payload...',
+                'Conectando a servidor remoto...',
+                'Verificando segurança do sistema...',
+                'Acesso concedido ao kernel.',
+                'Exfiltrando dados...',
+                'Processo iniciado: sys_update.exe',
+                'Criptografando arquivos...',
+                'Explorando rede interna...',
+                'Acesso root obtido.',
+                'Módulos maliciosos carregados.'
+            ];
+            let index = 0;
+
+            setInterval(() => {
+                infectedOutput.textContent += lines[index % lines.length] + '\n';
+                infectedOutput.scrollTop = infectedOutput.scrollHeight;
+                index += 1;
+            }, 110);
+        }
+    </script>
+</body>
+
+</html>
